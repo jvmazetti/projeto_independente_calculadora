@@ -1,0 +1,177 @@
+//ESTRUTURA BÁSICA DO PROJETO:
+
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>CALCULADORA</h1>
+        <div class="calculadora">
+            <h1>Calculadora</h1>
+            <p class="resultado"></p>
+            <table>
+                <tr>
+                    <td><button onclick="clean()">C</button></td>
+                    <td><button onclick="back()"><</button></td>
+                    <td><button onclick="inserir('/')">/</button></td>
+                    <td><button onclick="inserir('X')">X</button></td>
+                </tr>
+                <tr>
+                    <td><button onclick="inserir('7')">7</button></td>
+                    <td><button onclick="inserir('8')">8</button></td>
+                    <td><button onclick="inserir('9')">9</button></td>
+                    <td><button onclick="inserir('-')">-</button></td>
+                </tr>
+                <tr>
+                    <td><button onclick="inserir('4')">4</button></td>
+                    <td><button onclick="inserir('5')">5</button></td>
+                    <td><button onclick="inserir('6')">6</button></td>
+                    <td><button onclick="inserir('+')">+</button></td>
+                </tr>
+                <tr>
+                    <td><button onclick="inserir('1')">1</button></td>
+                    <td><button onclick="inserir('2')">2</button></td>
+                    <td><button onclick="inserir('3')">3</button></td>
+                    <td rowspan="2"><button style="height: 106px;" onclick="calcular()">=</button></td>
+                </tr>
+                <tr>
+                    <td colspan="2"><button style="width: 106px;" onclick="inserir('0')">0</button></td>
+                    <td><button onclick="inserir('.')">.</button></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
+
+
+
+//ESTILIZAÇÃO DO PROJETO:
+
+
+-> Reset da página:
+
+*{
+    padding:0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif
+}
+
+
+-> Fundo da Página:
+
+body{
+    height: 100vh;
+    width: 100vw;
+    background-image: linear-gradient(45deg, black, crimson);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+-> Fundo do Conteúdo:
+
+
+.container{
+    height: 100%;
+    color:white;
+    text-align: center;
+}
+
+
+-> Resultado da Calculdora:
+
+.resultado{
+    background-color: white;
+    width:207px;
+    height: 30px;
+    margin: auto;
+    margin-bottom:10px;
+    margin-top: 10px;
+    font-size: 25px;
+    color:black;
+    text-align: right;
+    padding: 10px;
+}
+
+
+-> Campo dos botões:
+
+.calculadora{
+    position:absolute;
+    background-color:rgba(0, 0, 0, 0.7);
+    top:50%;
+    transform: translate(0, -50%);
+    border-radius: 15px;
+    padding: 15px;
+}
+
+
+-> Botões:
+
+button{
+    width: 50px;
+    height: 50px;
+    font-size: 25px;
+    margin: 3px;
+    cursor: pointer;
+    background-color: rgb(31, 31, 31);
+    border: none;
+    color:white;
+    transition: background-color 0.4s ease-in;
+}
+
+button:hover{
+    background-color: black;
+}
+
+button:active{
+    opacity: 0.2;
+}
+
+
+
+//CÓDIGO:
+
+
+
+-> Pegar o valor dos botões e e mostrá-los na tela:
+
+    function inserir(num) {
+        let numero = document.querySelector('.resultado').innerHTML;
+        document.querySelector('.resultado').innerHTML = numero + num;
+    }
+
+-> Criar o evento limpar todo o input quando o botão de limprar for clicado:
+
+    function clean(){
+        document.querySelector('.resultado').innerHTML = ' '
+    }
+
+-> Criar o evento de apagar número:
+
+    function back(){
+        let resultado = document.querySelector('.resultado').innerHTML;
+        document.querySelector('.resultado').innerHTML = resultado.substring(0, resultado.length -1);
+    }
+
+-> Criar o evento de calcular quando clicamos em igual:
+
+    function calcular() {
+        let resultado = document.querySelector('.resultado').innerHTML;
+        if(resultado){
+            document.querySelector('.resultado').innerHTML = eval(resultado);
+        }else{
+            document.querySelector('.resultado').innerHTML = 'Nenhum valor...'
+        }
+    }
+
